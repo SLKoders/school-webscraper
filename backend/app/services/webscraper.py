@@ -1,13 +1,13 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from typing import List
+from typing import List, Dict
 
 class Webscraper:
     
     def __init__(self):
         self.driver = webdriver.Chrome()
         
-    def search(self, query: str) ->  List[str]:
+    def search(self, query: str):
         links = []
         self.driver.get(f'https://kaksepishe.com/?s={query}&type=title')
         
@@ -20,4 +20,17 @@ class Webscraper:
         else:
             links.append(self.driver.current_url)
             
-        return links
+        return self.get_data_from_links(links)
+    
+    def extract_page(self, link: str) -> str:
+        self.driver.get(link)
+        return '\n'.join([p.text for p in self.driver.find_elements(By.XPATH, '//article/div/p')])
+
+    def get_data_from_links(self, links: List[str]) -> Dict[str, str]:
+        data = {}
+        
+        for link in links:
+            page = self.extract_page(link)
+            data[link] = page
+            
+        return data

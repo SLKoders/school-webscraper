@@ -6,5 +6,5 @@ router = APIRouter(prefix='/webscraper', tags=['webscraper'])
 webscraper = Webscraper()
 
 @router.get('/search/{query}')
-async def search(query: str) -> List[str]:
+async def search(query: str):
     return webscraper.search(query)
