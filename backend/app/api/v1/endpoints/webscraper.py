@@ -22,3 +22,7 @@ async def search(query: str):
             })
             
     return relevant_results
+
+# @router.get('/extract')
+# async def extract(link: str):
+#     return webscraper.extract_page(link)
