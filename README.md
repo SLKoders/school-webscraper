@@ -8,10 +8,8 @@ A Python-based tool that scrapes educational content in Bulgarian from trusted w
 
 - 🔍 **Smart Search**: Enter a subject or theme (e.g., _„минало свършено време“_) and the scraper will find relevant articles.
 - 📄 **Content Extraction**: Extracts clean article text from matching results.
-- 🤖 **AI-Powered Simplification**: Uses an Gemini to rewrite the content clearly, **without adding or changing facts**.
+- 🤖 **AI-Powered Simplification**: Uses Gemini to rewrite the content clearly, **without adding or changing facts**.
 - 🇧🇬 **Supports Only Bulgarian**.
-
----
 
 ## 🧠 How It Works
 
@@ -20,12 +18,8 @@ A Python-based tool that scrapes educational content in Bulgarian from trusted w
 3. **Extraction**: Article contents are scraped and stored.
 4. **AI Processing**: If an article contains useful info, the AI returns a simplified explanation.
 
----
-
 ## ⚙️ Technologies Used
 
 - **Python 3.11.2**
 - `FastAPI`
 - `Gemini API`
-
----
