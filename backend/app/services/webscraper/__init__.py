@@ -1,0 +1,1 @@
+from app.services.webscraper.bulgarian import BulgarianWebscraper

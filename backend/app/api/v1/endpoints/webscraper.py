@@ -1,16 +1,21 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from app.services.webscraper import Webscraper
+from app.services.webscraper import BulgarianWebscraper
 from app.services.chatbot import ChatBot
 from typing import List
 
 router = APIRouter(prefix='/webscraper', tags=['webscraper'])
-webscraper = Webscraper()
+bulgarian_webscraper = BulgarianWebscraper()
 chatbot = ChatBot()
 
-@router.get('/search/{query}')
-async def search(query: str):
+@router.get('/search/{subject}/{query}')
+async def search(subject: str, query: str):
+    if subject == 'bulgarian':
+        raw_data = bulgarian_webscraper.search(query)
+    else:
+        return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid subject")
+    
     relevant_results = []
-    raw_data = webscraper.search(query)
+    
     
     for url, article_text in raw_data.items():
         ai_response = chatbot.process_data(query, article_text)

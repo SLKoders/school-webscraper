@@ -1,13 +1,13 @@
-from selenium import webdriver
+from app.services.webscraper.base import BaseWebscraper
 from selenium.webdriver.common.by import By
 from typing import List, Dict
 
-class Webscraper:
+class BulgarianWebscraper(BaseWebscraper):
     
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        super().__init__()
         
-    def search(self, query: str):
+    def collect_links(self, query: str) -> List[str]:
         links = []
         self.driver.get(f'https://kaksepishe.com/?s={query}&type=title')
         
@@ -20,7 +20,7 @@ class Webscraper:
         else:
             links.append(self.driver.current_url)
             
-        return self.get_data_from_links(links)
+        return links
     
     def extract_page(self, link: str) -> str:
         self.driver.get(link)
@@ -32,12 +32,3 @@ class Webscraper:
                         or self::span or self::a][normalize-space(text())]
         """
         return '\n'.join([p.text for p in self.driver.find_elements(By.XPATH, xpath_expression)])
-
-    def get_data_from_links(self, links: List[str]) -> Dict[str, str]:
-        data = {}
-        
-        for link in links:
-            page = self.extract_page(link)
-            data[link] = page
-            
-        return data
