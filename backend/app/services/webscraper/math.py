@@ -16,4 +16,6 @@ class MathWebscraper(BaseWebscraper):
         return [link for link in links if link is not None and isinstance(link, str) and ('geometry' in link or 'algebra' in link)]
         
     def extract_page(self, link: str) -> str:
-        ...
+        self.driver.get(link)
+        
+        return self.driver.find_element(By.XPATH, "//article").text
