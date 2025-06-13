@@ -10,12 +10,13 @@ chatbot = ChatBot()
 
 @router.get('/search/{subject}/{query}')
 async def search(subject: str, query: str):
-    if subject == 'bulgarian':
-        raw_data = bulgarian_webscraper.search(query)
-    elif subject == 'math':
-        raw_data = math_webscraper.search(query)
-    else:
-        return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid subject")
+    match subject:
+        case 'bulgarian':
+            raw_data = bulgarian_webscraper.search(query)
+        case 'math':
+            raw_data = math_webscraper.search(query)
+        case _:
+            return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid subject")
     
     relevant_results = []
     
