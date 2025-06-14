@@ -22,11 +22,4 @@ class BulgarianWebscraper(BaseWebscraper):
     
     def extract_page(self, link: str) -> str:
         self.driver.get(link)
-        xpath_expression = """
-        //article/div//*[self::p or self::ol or self::ul or self::li 
-                        or self::strong or self::em or self::b or self::i
-                        or self::h1 or self::h2 or self::h3 or self::h4 
-                        or self::h5 or self::h6 or self::blockquote
-                        or self::span or self::a][normalize-space(text())]
-        """
-        return '\n'.join([p.text for p in self.driver.find_elements(By.XPATH, xpath_expression)])
+        return self.driver.find_element(By.XPATH, '//article').text
