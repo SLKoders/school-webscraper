@@ -9,13 +9,6 @@ app = FastAPI()
 
 app.include_router(api_router, prefix="/api/v1")
 
-def get_db():
-    db = SessionLocal()
-    try: 
-        yield db
-    finally:
-        db.close()
-
 # @app.get("/")
 # def read_root():
 #     return 'api works'
