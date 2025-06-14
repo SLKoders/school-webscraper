@@ -1,5 +1,5 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 from typing import List, Dict
 
 from abc import ABC, abstractmethod
@@ -7,7 +7,11 @@ from abc import ABC, abstractmethod
 class BaseWebscraper(ABC):
     
     def __init__(self):
-        self.driver = webdriver.Chrome()
+        options = Options()
+        options.add_argument('--headless=new')
+        
+        self.driver = webdriver.Chrome(options=options)
+        
     
     @abstractmethod
     def collect_links(self, query: str) -> List[str]:
