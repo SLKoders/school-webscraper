@@ -2,11 +2,14 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 
+from rest_framework.decorators import api_view
+
 from webscraper.services.bulgarian import BulgarianWebscraper
 
 # from .services.webscraper.bulgarian import BulgarianWebscraper
 
 # Create your views here.
+@api_view(['GET'])
 @require_http_methods(['GET'])
 def search(request):
     query = request.GET.get('q')
