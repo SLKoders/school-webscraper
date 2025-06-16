@@ -4,9 +4,10 @@ from django.views.decorators.http import require_http_methods
 
 from rest_framework.decorators import api_view
 
-from services.webscraper.bulgarian import BulgarianWebscraper
-from services.webscraper.math import MathWebscraper
-from services.chatbot import ChatBot
+from .services.webscraper.bulgarian import BulgarianWebscraper
+# from backend.webscraper.services.webscraper.bulgarian import BulgarianWebscraper
+from .services.webscraper.math import MathWebscraper
+from .services.chatbot import ChatBot
 
 @api_view(['GET'])
 @require_http_methods(['GET'])
