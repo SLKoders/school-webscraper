@@ -59,12 +59,10 @@ def sign_in(request):
         form = SignInForm(request.data)
         
         if form.is_valid():
-            username = request.data.get('username')
+            email = request.data.get('email')
             password = request.data.get('password')
             
-            print(username, password)
-            
-            user = authenticate(username=username, password=password)
+            user = authenticate(username=email, password=password)
             
             if user is not None:
                 login(request, user)
