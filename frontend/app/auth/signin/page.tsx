@@ -35,7 +35,7 @@ export default function SignIn() {
   })
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen text-center">
       <Form {...form}>
         <form className="space-y-8">
           <FormField
