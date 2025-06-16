@@ -2,8 +2,6 @@
 
 A Python-based tool that scrapes educational content in Bulgarian from trusted websites, then uses AI to simplify and explain it in student-friendly language.
 
----
-
 ## ✨ Features
 
 - 🔍 **Smart Search**: Enter a subject or theme (e.g., _„минало свършено време“_) and the scraper will find relevant articles.
@@ -21,5 +19,8 @@ A Python-based tool that scrapes educational content in Bulgarian from trusted w
 ## ⚙️ Technologies Used
 
 - **Python 3.11.2**
-- `FastAPI`
+- `Django`
 - `Gemini API`
+---
+- **React**
+- `shadcn/ui`
