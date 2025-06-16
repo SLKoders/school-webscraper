@@ -68,3 +68,9 @@ def sign_in(request):
                 login(request, user)
                 return Response(UserSerializer(user).data)
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['POST'])
+def sing_out(request):
+    logout(request)
+    
+    return Response({'message': 'Successfully signed out'}, status=status.HTTP_200_OK)
