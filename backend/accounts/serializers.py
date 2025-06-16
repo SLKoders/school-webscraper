@@ -13,3 +13,7 @@ class SignUpSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
+    
+class SignInSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)

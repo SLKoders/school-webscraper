@@ -8,7 +8,7 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 from .forms import SignUpForm, SignInForm
-from .serializers import UserSerializer, SignUpSerializer
+from .serializers import SignInSerializer, UserSerializer, SignUpSerializer
 
 @swagger_auto_schema(
     method='post',
@@ -27,7 +27,6 @@ from .serializers import UserSerializer, SignUpSerializer
 )
 @api_view(['POST'])
 def sign_up(request):
-    print(request.data)
     if request.method == "POST":
         form = SignUpForm(request.data)
         
@@ -37,3 +36,37 @@ def sign_up(request):
             return Response(UserSerializer(user).data, status=status.HTTP_201_CREATED)
     
         return Response(form.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@swagger_auto_schema(
+    method='post',
+    request_body=SignInSerializer,
+    responses={
+        201: UserSerializer,
+        400: openapi.Response('Bad Request', openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'field_name': openapi.Schema(type=openapi.TYPE_STRING, description='Error description'),
+                # Add other fields as needed
+            }
+        ))
+    },
+    operation_description="User sign up endpoint"
+) 
+@api_view(['POST'])
+def sign_in(request):
+    print(request.data)
+    if request.method == 'POST':
+        form = SignInForm(request.data)
+        
+        if form.is_valid():
+            username = request.data.get('username')
+            password = request.data.get('password')
+            
+            print(username, password)
+            
+            user = authenticate(username=username, password=password)
+            
+            if user is not None:
+                login(request, user)
+                return Response(UserSerializer(user).data)
+        return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
