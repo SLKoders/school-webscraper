@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from typing import List, Dict
-
 from abc import ABC, abstractmethod
 
 class BaseWebscraper(ABC):

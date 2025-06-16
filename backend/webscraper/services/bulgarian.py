@@ -1,6 +1,7 @@
-from app.services.webscraper.base import BaseWebscraper
 from selenium.webdriver.common.by import By
-from typing import List, Dict
+from typing import List
+
+from .base import BaseWebscraper
 
 class BulgarianWebscraper(BaseWebscraper):
     

@@ -1,5 +1,5 @@
 from typing import List
-from app.services.webscraper.base import BaseWebscraper
+from .base import BaseWebscraper
 from selenium.webdriver.common.by import By
 
 class MathWebscraper(BaseWebscraper):
