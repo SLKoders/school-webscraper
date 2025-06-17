@@ -13,6 +13,7 @@ class User(AbstractUser):
     
     username = None
     email = models.EmailField(unique=True)  # Ensure emails are unique
+    # is_admin = models.BooleanField(default=False) use if staff
     
     USERNAME_FIELD = 'email'  # Use email as the login field
     REQUIRED_FIELDS = []      # Remove username from required fields

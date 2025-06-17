@@ -8,7 +8,7 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 from .models import User
-
+from .decorators import staff_required, signin_required
 from .forms import SignUpForm, SignInForm
 from .serializers import SignInSerializer, UserSerializer, SignUpSerializer
 
@@ -77,7 +77,9 @@ def sing_out(request):
     
     return Response({'message': 'Successfully signed out'}, status=status.HTTP_200_OK)
 
+# @signin_required
 @api_view(['GET'])
+@staff_required
 def get_user_by_id(request, id):
     user = User.objects.get(id=id)
     
