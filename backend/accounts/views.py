@@ -98,3 +98,8 @@ def get_users(request):
     serializer = UserSerializer(users, many=True)
     
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+@sign_in_required
+def get_current_user(request):
+    return Response(UserSerializer(request.user).data)
