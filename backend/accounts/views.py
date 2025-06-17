@@ -102,4 +102,6 @@ def get_users(request):
 @api_view(['GET'])
 @sign_in_required
 def get_current_user(request):
-    return Response(UserSerializer(request.user).data)
+    return Response({
+        'isAuthenticated': True,
+        'user': UserSerializer(request.user).data})
