@@ -16,7 +16,7 @@ import {
 
 export function Navbar() {
   return (
-    <div className="m-5">
+    <div className="fixed top-0 left-0">
     <NavigationMenu viewport={false}>
       <NavigationMenuList>
         <NavigationMenuItem>

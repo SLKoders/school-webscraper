@@ -39,10 +39,7 @@ export default function SignIn() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const response = await postRequest("auth/signin", {
-      email: values.email,
-      password: values.password,
-    })
+    const response = await postRequest("auth/signin", values)
 
     if (response.status === 200) {
       router.push('/');
