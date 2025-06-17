@@ -90,3 +90,11 @@ def get_user_by_id(request, id):
     
     
     return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
+@staff_required
+def get_users(request):
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True)
+    
+    return Response(serializer.data, status=status.HTTP_200_OK)
