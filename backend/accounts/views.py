@@ -7,6 +7,8 @@ from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
+from .models import User
+
 from .forms import SignUpForm, SignInForm
 from .serializers import SignInSerializer, UserSerializer, SignUpSerializer
 
@@ -74,3 +76,15 @@ def sing_out(request):
     logout(request)
     
     return Response({'message': 'Successfully signed out'}, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def get_user_by_id(request, id):
+    user = User.objects.get(id=id)
+    
+    if user:
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    
+    return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
