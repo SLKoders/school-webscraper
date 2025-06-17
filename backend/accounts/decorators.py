@@ -4,7 +4,7 @@ from rest_framework import status
 
 def staff_required(view_func):
     @wraps(view_func)
-    @signin_required
+    @sign_in_required
     def _wrapped_view(request, *args, **kwargs):
         if not request.user.is_staff:
             return Response(
@@ -14,7 +14,7 @@ def staff_required(view_func):
         return view_func(request, *args, **kwargs)
     return _wrapped_view
 
-def signin_required(view_func):
+def sign_in_required(view_func):
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
         if not request.user.is_authenticated:

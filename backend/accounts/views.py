@@ -8,7 +8,7 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 from .models import User
-from .decorators import staff_required, signin_required
+from .decorators import staff_required, sign_in_required
 from .forms import SignUpForm, SignInForm
 from .serializers import SignInSerializer, UserSerializer, SignUpSerializer
 
@@ -72,7 +72,7 @@ def sign_in(request):
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['POST'])
-def sing_out(request):
+def sign_out(request):
     logout(request)
     
     return Response({'message': 'Successfully signed out'}, status=status.HTTP_200_OK)
