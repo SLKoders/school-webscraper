@@ -6,7 +6,7 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'email', 'is_staff')  # Add other fields as needed
+        fields = ('id', 'email', 'is_staff', 'date_joined')  # Add other fields as needed
 
 class SignUpSerializer(serializers.Serializer):
     # username = serializers.CharField()
