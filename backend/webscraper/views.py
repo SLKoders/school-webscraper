@@ -18,7 +18,7 @@ def scrape(request, category, query):
     match category:
         case 'math':
             webscraper = MathWebscraper()
-        case 'bulgarian':
+        case 'bg':
             webscraper = BulgarianWebscraper()
         case _:
             return JsonResponse({'error': 'Invalid category'}, status=400)
