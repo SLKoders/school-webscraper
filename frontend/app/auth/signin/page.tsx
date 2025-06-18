@@ -2,7 +2,6 @@
 
 import { Input } from "@/components/ui/input"
 import Link from 'next/link';
-import { postRequest } from "@/lib/api";
 import {
   Form,
   FormControl,
@@ -17,6 +16,7 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation";
+import api from "@/lib/api";
 
 export default function SignIn() {
   const router = useRouter();
@@ -39,7 +39,7 @@ export default function SignIn() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const response = await postRequest("auth/signin", values)
+    const response = await api.post("auth/signin", values)
 
     if (response.status === 200) {
       router.push('/');
