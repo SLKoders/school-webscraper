@@ -5,9 +5,11 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { getRequest } from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, ChevronsUpDown } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
@@ -25,6 +27,7 @@ const categories = [
 
 export default function Webscraper() {
     // <div className="fixed bottom-4 left-0 right-0 flex justify-center mb-8"></div>
+    const router = useRouter();
 
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
@@ -46,8 +49,14 @@ export default function Webscraper() {
         },
     })
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
-      }
+        const response = await getRequest(`webscraper/scrape/${values.category}/${values.query}`);
+        const data = await response.data;
+
+        if (response.status === 200) {
+            // router.push(`/chat/${data.chatId}`);
+            console.log(data);
+        }
+    }
 
     return (
         <div className="flex items-center justify-center min-h-screen">

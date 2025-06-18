@@ -46,3 +46,33 @@ export async function postRequest<T>(
     }
   }
 }
+
+export async function getRequest<T>(
+  url: string
+): Promise<ApiResponse<T>> {
+  try {
+    const response: AxiosResponse<T> = await axios.get(baseUrl + url);
+    return {
+      data: response.data,
+      status: response.status,
+      headers: response.headers as Record<string, string>
+    };
+  } catch (error) {
+    const axiosError = error as AxiosError;
+    if (axiosError.response) {
+      throw {
+        data: axiosError.response.data,
+        status: axiosError.response.status,
+        headers: axiosError.response.headers as Record<string, string>
+      };
+    } else if (axiosError.request) {
+      throw {
+        message: 'No response received from the server'
+      };
+    } else {
+      throw {
+        message: axiosError.message
+      };
+    }
+  }
+}
