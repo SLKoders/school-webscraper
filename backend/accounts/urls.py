@@ -9,4 +9,5 @@ urlpatterns = [
     path('users/<uuid:id>', views.get_user_by_id, name='get_user_by_id'),
     path('users', views.get_users, name='get_users'),
     path('me', views.get_current_user, name='get_current_user'),
+    path('csrf', views.get_csrf, name='get_csrf'),
 ]

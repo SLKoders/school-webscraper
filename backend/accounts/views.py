@@ -6,6 +6,8 @@ from django.contrib.auth import login, logout, authenticate
 from rest_framework import status
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from rest_framework.decorators import permission_classes
+from rest_framework.permissions import AllowAny
 
 from .models import User
 from .decorators import staff_required, sign_in_required
@@ -105,3 +107,10 @@ def get_current_user(request):
     return Response({
         'isAuthenticated': True,
         'user': UserSerializer(request.user).data})
+    
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_csrf(request):
+    from django.middleware.csrf import get_token
+    
+    return Response({'csrfToken': get_token(request)})
