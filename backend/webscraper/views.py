@@ -12,6 +12,7 @@ from .services.webscraper.math import MathWebscraper
 from .services.chatbot import ChatBot
 from .models import Question, ResponseItem
 from .models import Response as ResponseModel
+from .serializers import QuestionSerializer
 
 @api_view(['GET'])
 @sign_in_required
@@ -67,3 +68,13 @@ def scrape(request, category, query):
         response_item.save()
             
     return Response({"results": relevant_results}, status=200)
+
+
+@api_view(['GET'])
+@sign_in_required
+def get_questions(request):
+    user = request.user
+    
+    questions = Question.objects.filter(user=user)
+    serializer = QuestionSerializer(questions, many=True)
+    return Response(serializer.data, status=200)
