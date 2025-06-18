@@ -11,7 +11,7 @@ from .services.webscraper.bulgarian import BulgarianWebscraper
 from .services.webscraper.math import MathWebscraper
 from .services.chatbot import ChatBot
 from .models import Question, Article
-from .serializers import QuestionSerializer
+from .serializers import ArticleSerializer, QuestionSerializer
 
 @api_view(['GET'])
 @sign_in_required
@@ -74,4 +74,18 @@ def get_questions(request):
     
     questions = Question.objects.filter(user=user)
     serializer = QuestionSerializer(questions, many=True)
+    return Response(serializer.data, status=200)
+
+@api_view(['GET'])
+@sign_in_required
+def get_articles_by_question(request, question_id):
+    question = Question.objects.get(id=question_id)
+    
+    if question.user != request.user:
+        return Response({"You don't have access to this data!"}, status=403)
+    
+    articles = Article.objects.filter(question=question)
+    
+    serializer = ArticleSerializer(articles, many=True)
+    
     return Response(serializer.data, status=200)
