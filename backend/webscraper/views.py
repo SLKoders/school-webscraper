@@ -10,8 +10,7 @@ from .services.webscraper.bulgarian import BulgarianWebscraper
 # from backend.webscraper.services.webscraper.bulgarian import BulgarianWebscraper
 from .services.webscraper.math import MathWebscraper
 from .services.chatbot import ChatBot
-from .models import Question, ResponseItem
-from .models import Response as ResponseModel
+from .models import Question, Article
 from .serializers import QuestionSerializer
 
 @api_view(['GET'])
@@ -39,12 +38,15 @@ def scrape(request, category, query):
         
     chatbot = ChatBot()
     
+    print('Scraping data...')
     raw_data = webscraper.search(query)
     
     relevant_results = []
     
-    
+    print('Scraper data collected')
+
     for url, article_text in raw_data.items():
+        print('Sending data to AI...')
         ai_response = chatbot.process_data(query, article_text)
         
         if "Текстът не съдържа информация" not in ai_response:
@@ -53,19 +55,14 @@ def scrape(request, category, query):
                 "text": ai_response
             })
             
-    response = ResponseModel(
-        question=question
-    )
+            article = Article(
+                question=question,
+                url=url,
+                text=ai_response,
+            )
+            article.save() 
     
-    response.save()
-    
-    for result in relevant_results:
-        response_item = ResponseItem(
-            response=response,
-            url=result["url"],
-            text=result["text"],
-        )
-        response_item.save()
+        print('Data collected')   
             
     return Response({"results": relevant_results}, status=200)
 

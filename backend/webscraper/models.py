@@ -19,7 +19,22 @@ class Question(models.Model):
     def __str__(self):
         return self.question
     
-class Response(models.Model):
+# class Response(models.Model):
+#     id = models.UUIDField(
+#         primary_key=True,
+#         default=uuid.uuid4,
+#         editable=False,
+#         unique=True
+#     )
+    
+#     # response = models.TextField(max_length=255)
+#     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+#     created_at = models.DateTimeField(auto_now_add=True)
+    
+#     def __str__(self):
+#         return self.question.question
+    
+class Article(models.Model):
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -27,21 +42,7 @@ class Response(models.Model):
         unique=True
     )
     
-    # response = models.TextField(max_length=255)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return self.question.question
-    
-class ResponseItem(models.Model):
-    id = models.UUIDField(
-        primary_key=True,
-        default=uuid.uuid4,
-        editable=False,
-        unique=True
-    )
-    
-    response = models.ForeignKey(Response, on_delete=models.CASCADE)
     url = models.URLField(max_length=255)
     text = models.TextField()
