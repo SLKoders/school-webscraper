@@ -1,9 +1,12 @@
 "use client"
 import { Label } from "@/components/ui/label";
 import api from "@/lib/api";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Profile() {
+    const router = useRouter();
+
     const [email, setEmail] = useState();
     const [dateJoined, setDateJoined] = useState();
 
@@ -15,6 +18,7 @@ export default function Profile() {
             setDateJoined(response.data.user.date_joined);
         } catch (error) {
             console.error("Error loading profile:", error);
+            router.push('auth/signin');
         }
     }
 

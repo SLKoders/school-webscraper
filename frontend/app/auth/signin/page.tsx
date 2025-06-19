@@ -39,13 +39,15 @@ export default function SignIn() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const response = await api.post("auth/signin", values)
+    try {
+      const response = await api.post("auth/signin", values)
 
-    if (response.status === 200) {
-      router.push('/');
+      if (response.status === 200) {
+        router.push('/');
+      }
+    } catch {
+      console.log(values);
     }
-
-    console.log(response.data);
   }
 
   return (
