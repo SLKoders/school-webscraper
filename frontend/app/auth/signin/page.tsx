@@ -43,6 +43,7 @@ export default function SignIn() {
       const response = await api.post("auth/signin", values)
 
       if (response.status === 200) {
+        localStorage.setItem('Token', response.data.token);
         router.push('/');
       }
     } catch {

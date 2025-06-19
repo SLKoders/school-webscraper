@@ -10,6 +10,7 @@ const api = axios.create({
 });
 
 let csrfToken: string | null = null;
+let authToken: string | null = null;
 
 async function fetchCSRFToken() {
   try {
@@ -23,6 +24,10 @@ async function fetchCSRFToken() {
   }
 }
 
+function getAuthToken(): string | null {
+  return localStorage.getItem('Token') || Cookies.get('Token') || null;
+}
+
 // Request interceptor
 api.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
   // If it's a GET request to the CSRF endpoint, skip adding the header
@@ -32,10 +37,12 @@ api.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
 
   // Get CSRF token from cookie or fetch a new one if not available
   csrfToken = Cookies.get('csrftoken') || await fetchCSRFToken();
+  authToken = getAuthToken();
 
   if (csrfToken) {
     config.headers = config.headers || {};
     config.headers['X-CSRFToken'] = csrfToken;
+    config.headers['Authorization'] = `Token ${authToken}`;
   }
 
   return config;
