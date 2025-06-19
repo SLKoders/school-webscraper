@@ -26,12 +26,6 @@ const categories = [
   },
 ]
 
-interface Question {
-  id: string;
-  category: string;
-  question: string;
-}
-
 export default function Webscraper() {
     // <div className="fixed bottom-4 left-0 right-0 flex justify-center mb-8"></div>
     const router = useRouter();
