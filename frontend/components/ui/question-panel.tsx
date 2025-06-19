@@ -16,6 +16,17 @@ export default function QuestionPanel() {
       setQuestions(response.data);
     }
 
+    function formatDateTime(date: Date) {
+        return new Intl.DateTimeFormat('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZoneName: 'short'
+        }).format(date);
+    }
+
     useEffect(() => {
       loadQuestions();
     }, []);
@@ -24,7 +35,7 @@ export default function QuestionPanel() {
           {questions.map((question, index) => (
             <Card key={index} className="p-3 w-60">
               <CardTitle><Button variant="ghost" onClick={() => router.push(`/webscraper/${question.id}/`)}>{question.question}</Button></CardTitle>
-              <CardDescription>{question.category}</CardDescription>
+              <CardDescription>{formatDateTime(new Date(question.created_at))}</CardDescription>
             </Card>
           ))}
         </div>
