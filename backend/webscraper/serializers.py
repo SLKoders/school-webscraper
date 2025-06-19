@@ -4,7 +4,7 @@ from .models import Article, Question
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ('id', 'category', 'question')
+        fields = ('id', 'category', 'question', 'created_at')
         
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
