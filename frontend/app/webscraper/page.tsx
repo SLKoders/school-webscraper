@@ -6,6 +6,7 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Command
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import QuestionPanel from "@/components/ui/question-panel";
 import api from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,9 +28,6 @@ const categories = [
 ]
 
 export default function Webscraper() {
-    // <div className="fixed bottom-4 left-0 right-0 flex justify-center mb-8"></div>
-    const router = useRouter();
-
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
     const [questions, setQuestions] = React.useState<Question[]>([])
@@ -60,26 +58,9 @@ export default function Webscraper() {
         }
     }
 
-    async function loadQuestions() {
-      const response = await api.get("webscraper/get-questions")
-
-      setQuestions(response.data);
-    }
-
-    useEffect(() => {
-      loadQuestions();
-    }, []);
-
     return (
       <div>
-        <div className="fixed left-0 top-1/2 transform -translate-y-1/2 h-[80vh] overflow-y-auto flex flex-col space-y-4 p-4">
-          {questions.map((question, index) => (
-            <Card key={index} className="p-3 w-60">
-              <CardTitle><Button variant="ghost" onClick={() => router.push(`/webscraper/${question.id}/`)}>{question.question}</Button></CardTitle>
-              <CardDescription>{question.category}</CardDescription>
-            </Card>
-          ))}
-        </div>
+        <QuestionPanel></QuestionPanel>
 
         <div className="flex items-center justify-center min-h-screen">
               <div className="flex items-center gap-2">
