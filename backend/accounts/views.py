@@ -57,8 +57,10 @@ def sign_up(request):
     operation_description="User sign up endpoint"
 ) 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def sign_in(request):
     print(request.data)
+    print('signin')
     if request.method == 'POST':
         form = SignInForm(request.data)
         
