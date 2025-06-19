@@ -91,6 +91,10 @@ def get_articles_by_question(request, question_id):
     
     articles = Article.objects.filter(question=question)
     
-    serializer = ArticleSerializer(articles, many=True)
+    article_serializer = ArticleSerializer(articles, many=True)
+    question_serializer = QuestionSerializer(question)
     
-    return Response(serializer.data, status=200)
+    return Response({
+        "articles": article_serializer.data,
+        "question": question_serializer.data
+    }, status=200)
