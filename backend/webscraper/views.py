@@ -67,7 +67,7 @@ def scrape(request, category, query):
     
         print('Data collected')   
             
-    return Response({"results": relevant_results}, status=200)
+    return Response({"results": relevant_results, "question": QuestionSerializer(question).data}, status=200)
 
 
 @api_view(['GET'])
