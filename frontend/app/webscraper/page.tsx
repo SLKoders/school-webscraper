@@ -28,6 +28,7 @@ const categories = [
 ]
 
 export default function Webscraper() {
+    const router = useRouter();
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
     const [questions, setQuestions] = React.useState<Question[]>([])
@@ -53,7 +54,7 @@ export default function Webscraper() {
         const data = await response.data;
 
         if (response.status === 200) {
-            // router.push(`/chat/${data.chatId}`);
+            router.push(`webscraper/${data.question.id}`);
             console.log(data);
         }
     }
