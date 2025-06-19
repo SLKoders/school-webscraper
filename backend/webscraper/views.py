@@ -76,7 +76,7 @@ def scrape(request, category, query):
 def get_questions(request):
     user = request.user
     
-    questions = Question.objects.filter(user=user)
+    questions = Question.objects.filter(user=user).order_by('-created_at')
     serializer = QuestionSerializer(questions, many=True)
     return Response(serializer.data, status=200)
 
@@ -89,7 +89,7 @@ def get_articles_by_question(request, question_id):
     if question.user != request.user:
         return Response({"You don't have access to this data!"}, status=403)
     
-    articles = Article.objects.filter(question=question)
+    articles = Article.objects.filter(question=question).order_by('-created_at')
     
     article_serializer = ArticleSerializer(articles, many=True)
     question_serializer = QuestionSerializer(question)
