@@ -1,6 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
+import { Card, CardAction, CardDescription, CardTitle } from "@/components/ui/card";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -77,14 +78,13 @@ export default function Webscraper() {
 
     return (
       <div>
-        <div className="fixed left-0 top-1/2 transform -translate-y-1/2 flex flex-col space-y-4 p-4">
+        <div className="fixed left-0 top-1/2 transform -translate-y-1/2 h-[80vh] overflow-y-auto flex flex-col space-y-4 p-4">
           {questions.map((question, index) => (
-            <div key={ index } className="bg-background border rounded-lg p-3 shadow-sm w-48">
-              <h3 className="font-medium">{ question.question }</h3>
-              <p className="text-sm text-muted-foreground">{ question.category }</p>
-            </div>
+            <Card key={index} className="p-3 w-60">
+              <CardTitle><Button variant="ghost" onClick={() => router.push(`/webscraper/${question.id}/`)}>{question.question}</Button></CardTitle>
+              <CardDescription>{question.category}</CardDescription>
+            </Card>
           ))}
-          
         </div>
 
         <div className="flex items-center justify-center min-h-screen">
