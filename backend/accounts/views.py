@@ -8,6 +8,7 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import AllowAny
+from rest_framework.authtoken.models import Token
 
 from .models import User
 from .decorators import staff_required, sign_in_required
@@ -72,7 +73,11 @@ def sign_in(request):
             
             if user is not None:
                 login(request, user)
-                return Response(UserSerializer(user).data)
+                token, created = Token.objects.get_or_create(user=user)
+                return Response({
+                    'user': UserSerializer(user).data,
+                    'token': token.key,
+                })
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['POST'])

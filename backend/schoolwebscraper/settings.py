@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'accounts',
     'webscraper',
     'corsheaders',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -140,11 +141,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
-        'Bearer': {
+        'Token': {
             'type': 'apiKey',
             'name': 'Authorization',
-            'in': 'header'
-        }
+            'in': 'header',
+            'description': 'Token-based authentication with format: Token <token>',
+        },
     },
     'USE_SESSION_AUTH': False,
 }
@@ -160,7 +162,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
 

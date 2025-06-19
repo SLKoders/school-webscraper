@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_http_methods
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 
 from accounts.decorators import sign_in_required
 
@@ -13,8 +13,11 @@ from .services.chatbot import ChatBot
 from .models import Question, Article
 from .serializers import ArticleSerializer, QuestionSerializer
 
+from rest_framework.permissions import AllowAny, IsAuthenticated
+
 @api_view(['GET'])
-@sign_in_required
+# @sign_in_required
+# @permission_classes([IsAuthenticated])
 def scrape(request, category, query):
     if not query or not category:
         return JsonResponse({'error': 'No category or query provided'}, status=400)
@@ -69,6 +72,7 @@ def scrape(request, category, query):
 
 @api_view(['GET'])
 @sign_in_required
+@permission_classes([IsAuthenticated])
 def get_questions(request):
     user = request.user
     
@@ -78,6 +82,7 @@ def get_questions(request):
 
 @api_view(['GET'])
 @sign_in_required
+@permission_classes([IsAuthenticated])
 def get_articles_by_question(request, question_id):
     question = Question.objects.get(id=question_id)
     
