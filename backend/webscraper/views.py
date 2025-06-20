@@ -50,7 +50,7 @@ def scrape(request, category, query):
 
     for url, article_text in raw_data.items():
         print('Sending data to AI...')
-        ai_response = chatbot.process_data(query, article_text)
+        ai_response = chatbot.process_data(query, category, article_text)
         
         if "Текстът не съдържа информация" not in ai_response:
             relevant_results.append({
