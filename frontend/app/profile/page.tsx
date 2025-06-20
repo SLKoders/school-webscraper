@@ -42,8 +42,8 @@ export default function Profile() {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen text-center">
-            <Label>Email: { email }</Label>
-            <Label>Date Joined: {dateJoined ? formatDateTime(new Date(dateJoined)) : 'N/A'}</Label>
+            <Label>Имейл: { email }</Label>
+            <Label>Присъединил се на {dateJoined ? formatDateTime(new Date(dateJoined)) : 'N/A'}</Label>
         </div>
     )
 }

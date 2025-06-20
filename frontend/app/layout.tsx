@@ -39,7 +39,7 @@ export default function RootLayout({
             <Navbar></Navbar>
             {children}
           </ThemeProvider>
-          <ModeToggle></ModeToggle>
+          {/* <ModeToggle></ModeToggle> */}
       </body>
     </html>
   );
