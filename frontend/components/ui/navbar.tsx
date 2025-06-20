@@ -35,11 +35,6 @@ export function Navbar() {
             <Link href="/">Home</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/webscraper">Webscraper</Link>
-          </NavigationMenuLink>
-        </NavigationMenuItem>
 
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
@@ -58,10 +53,16 @@ export function Navbar() {
                   <Link href="/auth/signup">Sign Up</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
+              
             </>
         )}
         {isAuthenticated && (
           <>
+            <NavigationMenuItem>
+              <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                  <Link href="/webscraper">Webscraper</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
                 <Link href="/profile">Profile</Link>

@@ -10,6 +10,7 @@ import QuestionPanel from "@/components/ui/question-panel";
 import api from "@/lib/api";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios, { AxiosError } from "axios";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -55,7 +56,6 @@ export default function Webscraper() {
       try {
         const response = await api.get(`webscraper/scrape/${values.category}/${values.query}`);
         const data = await response.data;
-
         router.push(`webscraper/${data.question.id}`);
         console.log(data);
       } catch(error) {
@@ -63,6 +63,10 @@ export default function Webscraper() {
       } finally {
         setIsSubmitting(false);
       }
+    }
+
+    if (localStorage.getItem("Token") === null) {
+      router.push('/auth/signin');
     }
 
     return (
