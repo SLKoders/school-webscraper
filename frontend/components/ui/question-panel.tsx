@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Button } from "./button";
 import { Card, CardTitle, CardDescription } from "./card";
 import { useRouter } from "next/navigation";
+import { formatDateTime } from "@/lib/utils";
 
 export default function QuestionPanel() {
     const router = useRouter();
@@ -16,16 +17,7 @@ export default function QuestionPanel() {
       setQuestions(response.data);
     }
 
-    function formatDateTime(date: Date) {
-        return new Intl.DateTimeFormat('en-US', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-            timeZoneName: 'short'
-        }).format(date);
-    }
+    
 
     useEffect(() => {
       loadQuestions();

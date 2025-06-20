@@ -2,6 +2,7 @@
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import api from "@/lib/api";
+import { formatDateTime } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -42,7 +43,7 @@ export default function Profile() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen text-center">
             <Label>Email: { email }</Label>
-            <Label>Date Joined: { dateJoined }</Label>
+            <Label>Date Joined: {dateJoined ? formatDateTime(new Date(dateJoined)) : 'N/A'}</Label>
         </div>
     )
 }
