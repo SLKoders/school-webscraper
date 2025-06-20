@@ -22,4 +22,5 @@ class MathWebscraper(BaseWebscraper):
         self.driver.get(link)
         
         # return self.driver.find_element(By.XPATH, "//article").text
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//article"))).text
+        article = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//article")))
+        return str(article.get_attribute("textContent"))

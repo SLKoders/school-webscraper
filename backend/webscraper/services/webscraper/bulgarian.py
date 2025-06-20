@@ -27,5 +27,7 @@ class BulgarianWebscraper(BaseWebscraper):
     
     def extract_page(self, link: str) -> str:
         self.driver.get(link)
-        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, '//article'))).text
-        # return self.driver.find_element(By.XPATH, '//article').text
+        
+        # return self.driver.find_element(By.XPATH, "//article").text
+        article = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//article")))
+        return str(article.get_attribute("textContent"))
