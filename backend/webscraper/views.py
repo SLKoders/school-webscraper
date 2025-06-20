@@ -3,12 +3,14 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.http import require_http_methods
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
+from selenium.common.exceptions import TimeoutException
 
 from accounts.decorators import sign_in_required
+from webscraper.services.webscraper.math.math import MathWebscraper
 
 from .services.webscraper.bulgarian import BulgarianWebscraper
 # from backend.webscraper.services.webscraper.bulgarian import BulgarianWebscraper
-from .services.webscraper.math import MathWebscraper
+from .services.webscraper.math.matematikabg import MatematikaBGWebscraper
 from .services.chatbot import ChatBot
 from .models import Question, Article
 from .serializers import ArticleSerializer, QuestionSerializer
@@ -24,6 +26,7 @@ def scrape(request, category, query):
     
     match category:
         case 'math':
+            return Response({"error": "Not implemented yet"}, status=501)
             webscraper = MathWebscraper()
         case 'bg':
             webscraper = BulgarianWebscraper()
@@ -38,16 +41,19 @@ def scrape(request, category, query):
     )
     
     question.save()
-        
-    chatbot = ChatBot()
     
     print('Scraping data...')
-    raw_data = webscraper.search(query)
+    try:
+        raw_data = webscraper.search(query)
+    except TimeoutException:
+        return Response({"error": "Request timed out"}, status=500)
     
     relevant_results = []
     
     print('Scraper data collected')
     # print(raw_data)
+    
+    chatbot = ChatBot()
 
     for url, article_text in raw_data.items():
         print('Sending data to AI...')

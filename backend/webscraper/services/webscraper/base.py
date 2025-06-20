@@ -3,6 +3,8 @@ from selenium.webdriver.chrome.options import Options
 from typing import List, Dict
 from abc import ABC, abstractmethod
 
+from webscraper.services.link_collector import LinkCollector
+
 class BaseWebscraper(ABC):
     
     def __init__(self):
@@ -10,7 +12,7 @@ class BaseWebscraper(ABC):
         options.add_argument('--headless=new')
         
         self.driver = webdriver.Chrome(options=options)
-        
+        # self.link_collector = LinkCollector()
     
     @abstractmethod
     def collect_links(self, query: str) -> List[str]:
@@ -35,4 +37,5 @@ class BaseWebscraper(ABC):
         """
 
     def search(self, query: str) -> Dict[str, str]:
-        return {link: self.extract_page(link) for link in self.collect_links(query)}
+        return {link: content for link in self.collect_links(query) 
+        if (content := self.extract_page(link)) != ''}
