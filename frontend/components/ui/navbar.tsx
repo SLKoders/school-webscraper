@@ -27,7 +27,7 @@ export function Navbar() {
   }, [pathname]);
 
   return (
-    <div className="fixed top-0 left-0">
+    <div className="fixed top-0 left-0 mt-1 ml-1">
     <NavigationMenu viewport={false}>
       <NavigationMenuList>
         <NavigationMenuItem>

@@ -65,9 +65,14 @@ export default function Webscraper() {
       }
     }
 
-    if (localStorage.getItem("Token") === null) {
-      router.push('/auth/signin');
-    }
+    // if (localStorage.getItem("Token") === null) {
+    //   router.push('/auth/signin');
+    // }
+    useEffect(() => {
+        if (typeof window !== 'undefined' && !localStorage.getItem("Token")) {
+          router.push('/auth/signin');
+        }
+      }, [router]);
 
     return (
       <div>
