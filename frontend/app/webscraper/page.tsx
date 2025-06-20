@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
@@ -29,9 +29,10 @@ const categories = [
 
 export default function Webscraper() {
     const router = useRouter();
-    const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState("")
-    const [questions, setQuestions] = React.useState<Question[]>([])
+    const [open, setOpen] = useState(false)
+    // const [value, setValue] = useState("")
+    // const [questions, setQuestions] = useState<Question[]>([])
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const formSchema = z.object({
         category: z.string().min(1, {
@@ -50,13 +51,18 @@ export default function Webscraper() {
         },
     })
     async function onSubmit(values: z.infer<typeof formSchema>) {
+      setIsSubmitting(true);
+      try {
         const response = await api.get(`webscraper/scrape/${values.category}/${values.query}`);
         const data = await response.data;
 
-        if (response.status === 200) {
-            router.push(`webscraper/${data.question.id}`);
-            console.log(data);
-        }
+        router.push(`webscraper/${data.question.id}`);
+        console.log(data);
+      } catch(error) {
+        console.log(error);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
 
     return (
@@ -71,7 +77,7 @@ export default function Webscraper() {
                       className="flex items-center gap-2" // Changed to flex row with gap
                   >
                       <FormField
-    control={form.control}
+                        control={form.control}
     name="category"
     render={({ field }) => (
       <FormItem>
@@ -141,6 +147,7 @@ export default function Webscraper() {
                       type="submit"
                       size="icon"
                       className="text-3xl" // Removed absolute positioning
+                      disabled={isSubmitting}
                       >
                       <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" className="bi bi-arrow-up-short" viewBox="0 0 16 16">
                           <path fillRule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5"/>
