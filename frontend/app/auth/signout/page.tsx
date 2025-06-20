@@ -8,9 +8,13 @@ export default function SignOut() {
     const router = useRouter();
 
     async function signOut() {
-        api.post("auth/signout");
-        localStorage.removeItem("Token");
-        router.push("/auth/signin");
+        try {
+            api.post("auth/signout");
+            localStorage.removeItem("Token");
+            router.push("/auth/signin");
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
