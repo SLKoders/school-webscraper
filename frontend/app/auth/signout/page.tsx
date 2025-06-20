@@ -2,6 +2,7 @@
 
 import api from "@/lib/api"
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function SignOut() {
     const router = useRouter();
@@ -12,7 +13,9 @@ export default function SignOut() {
         router.push("/auth/signin");
     }
 
-    signOut();
+    useEffect(() => {
+        signOut();
+    }, []);
 
     return (
         <div>
