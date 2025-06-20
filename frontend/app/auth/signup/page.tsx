@@ -13,8 +13,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import { Button } from "@/components/ui/button"
-import { postRequest } from "@/lib/api"
 import { useRouter } from "next/navigation"
+import api from "@/lib/api"
 
 export default function SignUp() {
     const router = useRouter();
@@ -43,7 +43,7 @@ export default function SignUp() {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values);
 
-        const response = await postRequest("auth/signup", values)
+        const response = await api.post("auth/signup", values)
 
         if (response.status === 200) {
             router.push('/');

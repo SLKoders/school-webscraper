@@ -39,7 +39,7 @@ api.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
   csrfToken = Cookies.get('csrftoken') || await fetchCSRFToken();
   authToken = getAuthToken();
 
-  if (csrfToken) {
+  if (csrfToken && authToken) {
     config.headers = config.headers || {};
     config.headers['X-CSRFToken'] = csrfToken;
     config.headers['Authorization'] = `Token ${authToken}`;
