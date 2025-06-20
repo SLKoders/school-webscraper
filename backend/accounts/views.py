@@ -31,6 +31,7 @@ from .serializers import SignInSerializer, UserSerializer, SignUpSerializer
     operation_description="User sign up endpoint"
 )
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def sign_up(request):
     if request.method == "POST":
         form = SignUpForm(request.data)
