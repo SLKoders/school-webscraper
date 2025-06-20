@@ -21,10 +21,10 @@ const categories = [
     value: "bg",
     label: "Bulgarian",
   },
-  {
-    value: "math",
-    label: "Mathematics",
-  },
+  // {
+  //   value: "math",
+  //   label: "Mathematics",
+  // },
 ]
 
 export default function Webscraper() {
