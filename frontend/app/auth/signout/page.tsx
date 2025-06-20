@@ -9,7 +9,7 @@ export default function SignOut() {
     async function signOut() {
         api.post("auth/signout");
         localStorage.removeItem("Token");
-        router.push("auth/signin");
+        router.push("/auth/signin");
     }
 
     signOut();
