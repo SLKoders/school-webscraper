@@ -61,9 +61,9 @@ export default function SignUp() {
                         name="email"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Email</FormLabel>
+                                <FormLabel>Имейл</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="email" {...field}></Input>
+                                    <Input placeholder="имейл" {...field}></Input>
                                 </FormControl>
                             </FormItem>
                         )}
@@ -73,9 +73,9 @@ export default function SignUp() {
                         name="password1"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Password</FormLabel>
+                                <FormLabel>Парола</FormLabel>
                                 <FormControl>
-                                    <Input type="password" placeholder="password" {...field}></Input>
+                                    <Input type="password" placeholder="парола" {...field}></Input>
                                 </FormControl>
                             </FormItem>
                         )}
@@ -85,14 +85,14 @@ export default function SignUp() {
                         name="password2"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Repeat Password</FormLabel>
+                                <FormLabel>Парола... </FormLabel>
                                 <FormControl>
-                                    <Input type="password" placeholder="repeat password" {...field}></Input>
+                                    <Input type="password" placeholder="...отново :D" {...field}></Input>
                                 </FormControl>
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Sign up</Button>
+                    <Button type="submit">Регистрирай се</Button>
                 </form>
             </Form>
         </div>

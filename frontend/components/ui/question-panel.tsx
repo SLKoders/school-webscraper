@@ -25,7 +25,7 @@ export default function QuestionPanel() {
     return (
         <div className="fixed left-0 top-1/2 transform -translate-y-1/2 h-[80vh] overflow-y-auto flex flex-col space-y-4 p-4">
           <Button className="w-1/2" onClick={() => router.push(`/webscraper/`)}>
-            New Question
+            Нов въпрос
           </Button>
           {questions.map((question, index) => (
             <Card key={index} className="p-3 w-60 max-w-[240px]"> {/* Fixed width */}

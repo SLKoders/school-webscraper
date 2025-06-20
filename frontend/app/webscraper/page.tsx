@@ -20,7 +20,7 @@ import z from "zod";
 const categories = [
   {
     value: "bg",
-    label: "Bulgarian",
+    label: "Български език",
   },
   // {
   //   value: "math",
@@ -92,20 +92,20 @@ export default function Webscraper() {
                 variant="outline"
                 role="combobox"
                 aria-expanded={open}
-                className="w-[170px] justify-between"
+                className="w-[180px] justify-between"
                 {...field}  // Add this line to connect with form
               >
                 {field.value
                   ? categories.find((framework) => framework.value === field.value)?.label
-                  : "Select category..."}
+                  : "Избери категория..."}
                 <ChevronsUpDown className="opacity-50" />
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-[200px] p-0">
               <Command>
-                <CommandInput placeholder="Search category..." className="h-9"/>
+                <CommandInput placeholder="Избери категория..." className="h-9"/>
                 <CommandList>
-                  <CommandEmpty>No category found.</CommandEmpty>
+                  <CommandEmpty>Няма намерена категория.</CommandEmpty>
                   <CommandGroup>
                     {categories.map((framework) => (
                       <CommandItem
@@ -141,7 +141,7 @@ export default function Webscraper() {
                       render={({ field }) => (
                           <FormItem className="flex-1"> {/* Added flex-1 */}
                           <FormControl>
-                              <Input className="w-150" placeholder="Search..." {...field} />
+                              <Input className="w-150" placeholder="Търси..." {...field} />
                           </FormControl>
                           {/* <FormMessage/> */}
                           </FormItem>

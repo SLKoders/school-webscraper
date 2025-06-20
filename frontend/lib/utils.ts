@@ -6,12 +6,11 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatDateTime(date: Date) {
-        return new Intl.DateTimeFormat('en-US', {
+        return new Intl.DateTimeFormat('bg-BG', {
             year: 'numeric',
             month: 'short',
             day: 'numeric',
             hour: '2-digit',
-            minute: '2-digit',
-            timeZoneName: 'short'
+            minute: '2-digit'
         }).format(date);
 }

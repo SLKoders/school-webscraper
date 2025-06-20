@@ -32,25 +32,25 @@ export function Navbar() {
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/">Home</Link>
+            <Link href="/">Начало</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-            <Link href="/about">About</Link>
+            <Link href="/about">За нас</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         {!isAuthenticated && (
             <>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                  <Link href="/auth/signin">Sign In</Link>
+                  <Link href="/auth/signin">Влез</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                  <Link href="/auth/signup">Sign Up</Link>
+                  <Link href="/auth/signup">Регистрирай се</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
               
@@ -60,17 +60,17 @@ export function Navbar() {
           <>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                  <Link href="/webscraper">Webscraper</Link>
+                  <Link href="/webscraper">Уебскрейпър</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                <Link href="/profile">Profile</Link>
+                <Link href="/profile">Профил</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                <Link href="/auth/signout">Sign Out</Link>
+                <Link href="/auth/signout">Отпиши ме</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           </>
