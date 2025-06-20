@@ -36,7 +36,7 @@ export default function WebScraper({
     <div>
       <QuestionPanel></QuestionPanel>
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <div className="self-end mr-100">
+        <div className="self-end mr-100 mt-15">
           <Card className="p-5">
             <CardTitle>{ question?.question }</CardTitle>
           </Card>
