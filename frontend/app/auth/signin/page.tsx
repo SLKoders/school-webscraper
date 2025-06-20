@@ -44,7 +44,7 @@ export default function SignIn() {
 
       if (response.status === 200) {
         localStorage.setItem('Token', response.data.token);
-        router.push('/');
+        router.push('/webscraper');
       }
     } catch {
       console.log(values);
@@ -82,6 +82,12 @@ export default function SignIn() {
             )}
           />
           <Button type="submit">Влез</Button>
+          <div className="text-center text-sm mt-4">
+            Нямате профил?{" "}
+            <Link href="/auth/signup" className="hover:underline">
+              Регистрирайте се от тук
+            </Link>
+          </div>
         </form>
       </Form>
     </div>

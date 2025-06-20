@@ -15,6 +15,7 @@ import * as z from "zod"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import api from "@/lib/api"
+import Link from "next/link"
 
 export default function SignUp() {
     const router = useRouter();
@@ -93,6 +94,12 @@ export default function SignUp() {
                         )}
                     />
                     <Button type="submit">Регистрирай се</Button>
+                    <div className="text-center text-sm mt-4">
+                        Имаш профил?{" "}
+                        <Link href="/auth/signin" className="hover:underline">
+                            Влез от тук
+                        </Link>
+                    </div>
                 </form>
             </Form>
         </div>

@@ -70,7 +70,7 @@ export function Navbar() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                <Link href="/auth/signout">Отпиши ме</Link>
+                <Link href="/auth/signout">Излез</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
           </>

@@ -1,9 +1,14 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { LayoutDashboard, Search, BookOpen, BrainCircuit, Languages } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function HomePage() {
+  const router = useRouter();
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b">
       {/* Header */}
@@ -100,10 +105,10 @@ export default function HomePage() {
       <section className="py-16">
         <div className="container text-center text-white">
           <h2 className="text-3xl font-bold mb-4">Готови ли сте да опитате?</h2>
-          <p className="max-w-2xl mx-auto mb-8 text-blue-100">
+          <p className="max-w-2xl mx-auto mb-8">
             Регистрирайте се сега и получете достъп до всички функции на платформата.
           </p>
-          <Button variant="secondary" size="lg">
+          <Button variant="secondary" size="lg" onClick={() => router.push('/auth/signup')}>
             Започнете безплатно
           </Button>
         </div>
