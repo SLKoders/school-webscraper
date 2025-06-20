@@ -2,11 +2,13 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import QuestionPanel from '@/components/ui/question-panel';
 import api from '@/lib/api';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { use, useEffect, useState } from 'react';
+import ReactMarkdown from "react-markdown";
 
 export default function WebScraper({
   params, 
@@ -42,7 +44,7 @@ export default function WebScraper({
         <div className="self-start ml-100">
           {articles.map((article, index) => (
             <Card key={index} className="w-150 p-5 mb-5">
-              <CardTitle>{article.text}</CardTitle>
+              <ReactMarkdown>{article.text}</ReactMarkdown>
               <CardDescription><Link href={article.url} target="_blank" rel="noopener noreferrer">{article.url}</Link></CardDescription>
             </Card>
           ))}
