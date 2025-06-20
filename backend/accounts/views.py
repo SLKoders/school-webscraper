@@ -82,6 +82,7 @@ def sign_in(request):
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
     
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def sign_out(request):
     logout(request)
     
