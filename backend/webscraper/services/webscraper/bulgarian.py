@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from typing import List
 
 from .base import BaseWebscraper
@@ -13,9 +15,11 @@ class BulgarianWebscraper(BaseWebscraper):
         self.driver.get(f'https://kaksepishe.com/?s={query}&type=title')
         
         if '?s=' in self.driver.current_url:
-            articles = self.driver.find_elements(By.TAG_NAME, 'article')
+            articles = WebDriverWait(self.driver, 30).until(
+                EC.presence_of_all_elements_located((By.TAG_NAME, 'article'))
+            )
             
-            links = [article.find_element(By.TAG_NAME, 'a').get_attribute('href') for article in articles]
+            links = [WebDriverWait(article, 30).until(EC.presence_of_element_located((By.TAG_NAME, 'a'))).get_attribute('href') for article in articles]
         else:
             links.append(self.driver.current_url)
             
@@ -23,4 +27,5 @@ class BulgarianWebscraper(BaseWebscraper):
     
     def extract_page(self, link: str) -> str:
         self.driver.get(link)
-        return self.driver.find_element(By.XPATH, '//article').text
+        return WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, '//article'))).text
+        # return self.driver.find_element(By.XPATH, '//article').text
