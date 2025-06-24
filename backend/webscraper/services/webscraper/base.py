@@ -37,5 +37,8 @@ class BaseWebscraper(ABC):
         """
 
     def search(self, query: str) -> Dict[str, str]:
-        return {link: content for link in self.collect_links(query) 
-        if (content := self.extract_page(link)) != ''}
+        try:
+            return {link: content for link in self.collect_links(query) 
+            if (content := self.extract_page(link)) != ''}
+        except Exception as e:
+            return {"": ""}

@@ -74,8 +74,24 @@ def scrape(request, category, query):
             )
             article.save() 
     
-        print('Data collected')   
-            
+        print('Data collected')  
+        
+    if len(relevant_results) < 1:
+        print("No relevant results found, generating text...")
+        url="https://gemini.google.com/"
+        ai_response = chatbot.generate_text(query, category)
+        article = Article(
+            question=question,
+            url=url,
+            text=ai_response
+        ) 
+        article.save()
+        
+        relevant_results.append({
+            "url": url,
+            "text": ai_response
+        })
+        
     return Response({"results": relevant_results, "question": QuestionSerializer(question).data}, status=200)
 
 

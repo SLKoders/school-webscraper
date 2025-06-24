@@ -15,11 +15,11 @@ class BulgarianWebscraper(BaseWebscraper):
         self.driver.get(f'https://kaksepishe.com/?s={query}&type=title')
         
         if '?s=' in self.driver.current_url:
-            articles = WebDriverWait(self.driver, 30).until(
+            articles = WebDriverWait(self.driver, 7).until(
                 EC.presence_of_all_elements_located((By.TAG_NAME, 'article'))
             )
             
-            links = [WebDriverWait(article, 30).until(EC.presence_of_element_located((By.TAG_NAME, 'a'))).get_attribute('href') for article in articles]
+            links = [WebDriverWait(article, 7).until(EC.presence_of_element_located((By.TAG_NAME, 'a'))).get_attribute('href') for article in articles]
         else:
             links.append(self.driver.current_url)
             
@@ -29,5 +29,5 @@ class BulgarianWebscraper(BaseWebscraper):
         self.driver.get(link)
         
         # return self.driver.find_element(By.XPATH, "//article").text
-        article = WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((By.XPATH, "//article")))
+        article = WebDriverWait(self.driver, 7).until(EC.presence_of_element_located((By.XPATH, "//article")))
         return str(article.get_attribute("textContent"))
