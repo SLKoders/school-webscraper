@@ -46,8 +46,8 @@ export default function SignIn() {
         localStorage.setItem('Token', response.data.token);
         router.push('/webscraper');
       }
-    } catch {
-      console.log(values);
+    } catch (error) {
+      console.log(error);
     }
   }
 

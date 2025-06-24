@@ -42,15 +42,13 @@ export default function SignUp() {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
-
         const response = await api.post("auth/signup", values)
 
-        if (response.status === 200) {
-            router.push('/');
+        if (response.status === 201) {
+            router.push('/auth/signin');
         }
 
-        console.log(response.data);
+        // console.log(response.data);
     }
 
     return (
