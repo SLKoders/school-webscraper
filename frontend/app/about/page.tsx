@@ -50,41 +50,26 @@ export default function About() {
           <div className="bg-white p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
             <User className="text-black" />
           </div>
-          <CardTitle>Педагози</CardTitle>
+          <CardTitle>Красимир Железов (Full-stack)</CardTitle>
         </CardHeader>
-        <CardContent>
-          <CardDescription>
-            Опитни учители и методисти, които гарантират качеството и точността на учебните материали.
-          </CardDescription>
-        </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
           <div className="bg-white p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
-            <Code className="text-black" />
+            <User className="text-black" />
           </div>
-          <CardTitle>Разработчици</CardTitle>
+          <CardTitle>Светослав Трифонов (Back-end)</CardTitle>
         </CardHeader>
-        <CardContent>
-          <CardDescription>
-            Програмисти, които изграждат и поддържат платформата, гарантирайки плавно и безпроблемно изживяване.
-          </CardDescription>
-        </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
           <div className="bg-white p-3 rounded-full w-12 h-12 flex items-center justify-center mb-4">
-            <BrainCircuit className="text-black" />
+            <User className="text-black" />
           </div>
-          <CardTitle>AI Специалисти</CardTitle>
+          <CardTitle>Лилия Стоянова (Front-end)</CardTitle>
         </CardHeader>
-        <CardContent>
-          <CardDescription>
-            Експерти в изкуствения интелект, които обучават моделите за обработка на естествен език специално за учебни цели.
-          </CardDescription>
-        </CardContent>
       </Card>
     </div>
   </section>
