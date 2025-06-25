@@ -14,7 +14,7 @@ let authToken: string | null = null;
 
 async function fetchCSRFToken() {
   try {
-    const response = await axios.get('http://localhost:8000/api/auth/csrf/', {
+    const response = await axios.get('http://localhost:8000/api/auth/csrf', {
       withCredentials: true
     });
     return response.data.csrfToken;
